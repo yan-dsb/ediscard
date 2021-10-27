@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -19,5 +16,49 @@ model User {
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 
+  balances                    Balance[]
+  recycler                    RecycledMaterial[] @relation(name: "recycler")
+  recycled_materials_receiver RecycledMaterial[] @relation(name: "recycled_materials_receiver")
   @@map("users")
+}
+
+model Balance {
+  id         String   @id @default(uuid())
+  amount     Float    @db.DoublePrecision
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  user    User   @relation(fields: [user_id], references: [id])
+  user_id String @unique
+
+  coupons Coupon[]
+  @@map("balances")
+}
+
+model Coupon {
+  id          String   @id @default(uuid())
+  amount      Float    @db.DoublePrecision
+  isUsed      Boolean
+  isCancelled Boolean
+  created_at  DateTime @default(now())
+  balance     Balance  @relation(fields: [balance_id], references: [id])
+
+  balance_id String
+  @@map("coupons")
+}
+
+model RecycledMaterial {
+  id                String   @id @default(uuid())
+  weight_base       Float    @db.DoublePrecision
+  weight_amount     Float    @db.DoublePrecision
+  balance_generated Float    @db.DoublePrecision
+  created_at        DateTime @default(now())
+
+  user_recycler User   @relation(name: "recycler", fields: [user_id], references: [id])
+  user_id       String
+
+  user_receiver User   @relation(name: "recycled_materials_receiver", fields: [user_id_admin], references: [id])
+  user_id_admin String
+
+  @@map("recycled_materials")
 }

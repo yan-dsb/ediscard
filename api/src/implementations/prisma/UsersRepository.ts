@@ -20,7 +20,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   async findByEmail(email: string) {
-    const user: User | null = await prismaClient.user.findFirst({
+    const user: User | null = await prismaClient.user.findUnique({
       where: { email }
     });
     let userDataTransformed;
@@ -36,9 +36,10 @@ class UsersRepository implements IUsersRepository {
     return userDataTransformed;
   }
   async findByID(user_id: string) {
-    const user: User | null = await prismaClient.user.findFirst({
+    const user: User | null = await prismaClient.user.findUnique({
       where: { id: user_id }
     });
+
     let userDataTransformed;
     if (user) {
       userDataTransformed = new User();

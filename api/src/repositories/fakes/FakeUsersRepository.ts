@@ -4,9 +4,9 @@ import { IUsersRepository } from '../IUsersRepository';
 
 class FakeUsersRepository implements IUsersRepository {
   private users: User[] = [];
-  async create({ name, email, password }: ICreateUserDTO) {
+  async create({ name, email, password, isAdmin = false }: ICreateUserDTO) {
     const user = new User();
-    Object.assign(user, { name, email, password });
+    Object.assign(user, { name, email, password, isAdmin });
     this.users.push(user);
 
     return user;

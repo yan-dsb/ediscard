@@ -9,7 +9,7 @@ class FindUserByEmailController {
     if (!errors.isEmpty()) {
       return response.status(400).json({ errors: errors.array() });
     }
-    const { email } = request.body;
+    const { email } = request.params;
 
     const usersRepository = new UsersRepository();
     const findUserByEmail = new FindUserByEmailService(usersRepository);

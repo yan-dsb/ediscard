@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import { UsersRepository } from '../implementations/prisma/UsersRepository';
+import { BalancesRepository } from '../implementations/prisma/BalancesRepository';
 import { BCryptHashProvider } from '../providers/implementations/BCryptHashProvider';
 import { CreateUserService } from '../services/CreateUserService';
 
@@ -13,9 +14,11 @@ class CreateUserController {
     const { name, email, password } = request.body;
 
     const usersRepository = new UsersRepository();
+    const balancesRepository = new BalancesRepository();
     const bCryptHashProvider = new BCryptHashProvider();
     const createUser = new CreateUserService(
       usersRepository,
+      balancesRepository,
       bCryptHashProvider
     );
 

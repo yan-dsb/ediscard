@@ -22,6 +22,13 @@ class RecycledMaterialsRepository implements IRecycledMaterialsRepository {
 
     return recycledMaterial;
   }
+  async listByUserID(user_id: string) {
+    const recycledMaterials = await prismaClient.recycledMaterial.findMany({
+      where: { user_id }
+    });
+
+    return recycledMaterials;
+  }
 }
 
 export { RecycledMaterialsRepository };

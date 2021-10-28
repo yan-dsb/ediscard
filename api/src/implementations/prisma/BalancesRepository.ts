@@ -6,7 +6,10 @@ import { IUpdateBalanceDTO } from '../../dtos/IUpdateBalanceDTO';
 
 class BalancesRepository implements IBalancesRepository {
   async create({ user_id, amount }: ICreateBalanceDTO) {
-    await prismaClient.balance.create({ data: { user_id, amount } });
+    const balance: Balance = await prismaClient.balance.create({
+      data: { user_id, amount }
+    });
+    return balance;
   }
 
   async findByUserID(user_id: string) {

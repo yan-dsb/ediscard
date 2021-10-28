@@ -11,6 +11,13 @@ class FakeCouponsRepository implements ICouponsRepository {
 
     return coupon;
   }
+
+  async listByBalanceID(balance_id: string) {
+    const coupons = this.coupons.filter(
+      coupon => coupon.balance_id === balance_id
+    );
+    return coupons;
+  }
 }
 
 export { FakeCouponsRepository };

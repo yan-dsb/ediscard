@@ -23,6 +23,14 @@ class FakeRecycledMaterialsRepository implements IRecycledMaterialsRepository {
 
     return recycledMaterial;
   }
+
+  async listByUserID(user_id: string) {
+    const recycledMaterials = this.recycledMaterials.filter(
+      recycledMaterial => recycledMaterial.user_id === user_id
+    );
+
+    return recycledMaterials;
+  }
 }
 
 export { FakeRecycledMaterialsRepository };

@@ -9,6 +9,8 @@ class FakeBalancesRepository implements IBalancesRepository {
     const balance = new Balance();
     Object.assign(balance, { user_id, amount });
     this.balances.push(balance);
+
+    return balance;
   }
 
   async findByUserID(user_id: string) {

@@ -5,7 +5,7 @@ io.on('connection', socket => {
   socket.on('weight_e_waste', () => {
     console.log('socket_id =>', new Date().getTime(), socket.id);
 
-    for (let index = 0; index < 20; index++) {
+    for (let index = 0; index < 200; index++) {
       io.to(socket.id).emit('result', index);
     }
   });

@@ -1,3 +1,4 @@
+import { classToClass } from 'class-transformer';
 import { sign } from 'jsonwebtoken';
 import { AppError } from '../errors/AppError';
 import { IHashProvider } from '../providers/IHashProvider';
@@ -33,7 +34,7 @@ class AuthenticateUserService {
       expiresIn: '1d',
       subject: user.id
     });
-    return { token };
+    return { token, user: classToClass(user) };
   }
 }
 

@@ -28,6 +28,7 @@ class UsersRepository implements IUsersRepository {
       userDataTransformed = new User();
       userDataTransformed.id = user.id;
       userDataTransformed.email = user.email;
+      userDataTransformed.name = user.name;
       userDataTransformed.password = user.password;
       userDataTransformed.created_at = user.created_at;
       userDataTransformed.updated_at = user.updated_at;
